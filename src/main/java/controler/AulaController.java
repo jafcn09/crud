@@ -74,7 +74,6 @@ public class AulaController extends HttpServlet {
 	}
 	
 	protected void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String queryParam = request.getParameter("query");
 		List<Aula> aulas = aDao.getAulas(queryParam);
 		request.setAttribute("aulas", aulas);

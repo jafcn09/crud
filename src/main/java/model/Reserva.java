@@ -17,12 +17,12 @@ public class Reserva implements Serializable {
 	private int idreserva;
 
 	//bi-directional many-to-one association to Aula
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="numaula")
 	private Aula aula;
 
 	//bi-directional many-to-one association to Usuario
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 

@@ -4,7 +4,7 @@
      <%@ page import="model.Aula" %><br>
 
   <%@ page import="dao.AulaDAO" %><br>
-  <%@page import = "java.sql.*" %>
+  
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +29,7 @@
        <th scope="col">Nombre De La Reserva</th>
       <th scope="col">Numero Del Aula</th>
         <th scope="col">Nombre Del Aula</th>
-         <th scope="col"></th>
+         <th scope="col">Acciones</th>
        
     </tr>
     

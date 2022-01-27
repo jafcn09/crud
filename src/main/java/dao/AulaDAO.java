@@ -205,7 +205,9 @@ public class AulaDAO {
 			session.close();
 			sessfact.close();
 		}
+
 		return aulas;
+	
 	}
 	
 public boolean reservar(int numaula, int idusuario) {

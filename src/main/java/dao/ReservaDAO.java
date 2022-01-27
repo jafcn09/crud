@@ -8,34 +8,52 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import model.Aula;
 import model.Reserva;
 import utils.HibernateUtil;
 
 public class ReservaDAO {
-    public List<Reserva> seleccionarReservas() {
-        List<Reserva> reservas = new ArrayList<Reserva>();
-        SessionFactory sessfact = HibernateUtil.getSessionFactory();
-
-        Session session = sessfact.getCurrentSession();
-
-        Transaction tr = null;
-
-        try {
-            tr = session.beginTransaction();
-            reservas = session.createQuery("Select r from Reserva r", Reserva.class).getResultList();
-        } catch (Exception ex) {
-            if (tr != null)
-                tr.rollback();
-
-            ex.printStackTrace();
-            reservas = null;
-        } finally {
-            session.close();
-            sessfact.close();
+public List<Reserva> seleccionarReservas(){
+		
+		List<Reserva> reservas = new ArrayList<Reserva>();
+		SessionFactory sessfact = HibernateUtil.getSessionFactory();
+		
+		Session session = sessfact.getCurrentSession();
+		
+		Transaction tr = null;
+		
+		try {
+			
+			tr = session.beginTransaction();
+			reservas = session.createQuery("Select r from Reserva r", Reserva.class).getResultList();
+			
+		}catch(Exception ex){
+			
+			if(tr!=null) 
+				tr.rollback();
+			
+			ex.printStackTrace();
+			reservas = null; 
+			
+		}
+		finally {
+			session.close();
+			sessfact.close();
+		}
+		
+for(Reserva variable:reservas){
+        	
+			System.out.println(variable.getIdreserva());
+        	;
+        	
         }
-
-        return reservas;
-    }
+		
+		return reservas; 
+		
+	}
+	
+	
+	
 
     public boolean eliminar(int idReserva) {
         SessionFactory sessFact = HibernateUtil.getSessionFactory();

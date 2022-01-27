@@ -8,9 +8,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import dao.AulaDAO;
 import dao.ReservaDAO;
+import dao.UsuarioDAO;
+import model.Aula;
 import model.Reserva;
+import model.Usuario;
 
 public class ReservaController extends HttpServlet {
 	  private static final long serialVersionUID = 1L;
@@ -50,14 +56,23 @@ public class ReservaController extends HttpServlet {
 			// TODO Auto-generated method stub
 			
 		}
-		private void listar(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
-		
-			  String queryParam = request.getParameter("query");
-		        List<Reserva> reservas = rDao.seleccionarReservas();
-		        request.setAttribute("reservas", reservas);
-		        rd = request.getRequestDispatcher("/main.jsp");
-		        rd.forward(request, response);
-		}
+		 private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			    ReservaDAO reserva = new ReservaDAO();
+			    List<Reserva> r = new ArrayList<>();
+			    r = reserva.seleccionarReservas();
+				request.setAttribute("reservas", reserva);
+
+			    AulaDAO aula = new AulaDAO();
+			    List<Aula> a = new ArrayList<>();
+			    a = aula.seleccionarAulas();
+			    request.setAttribute("aulas", aula);
+			    
+			    UsuarioDAO usuario = new UsuarioDAO();
+			    List Usuario;
+			    request.setAttribute("usuarios", usuario);
+
+			    request.getRequestDispatcher("reserva.jsp").forward(request, response);
+			  }
 		private void eliminar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			  int idReserva = Integer.parseInt(request.getParameter("idreserva"));
 		        boolean eliminado = rDao.eliminar(idReserva);
@@ -66,4 +81,5 @@ public class ReservaController extends HttpServlet {
 		        rd.forward(request, response);
 			
 		}
+		
 }

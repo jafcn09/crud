@@ -22,6 +22,7 @@
 						<a class="dropdown-item" href="#">Crear usuario</a>
 					</div>
 				</li>
+					<li class="nav-item"><a class="nav-link" href="reserva.jsp">Mi Reservas</a></li>
 			</c:if>
 		</ul>
 		
