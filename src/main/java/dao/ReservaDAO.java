@@ -53,7 +53,41 @@ for(Reserva variable:reservas){
 	}
 	
 	
+	//LISTANDO POR FILTRO 
+public List<Reserva> getIdReserva(String filter){
+
+	List<Reserva> reservas = new ArrayList<Reserva>();
 	
+	SessionFactory sessfact = HibernateUtil.getSessionFactory();		
+	Session session = sessfact.getCurrentSession();		
+	Transaction tr = null;
+	
+	try {
+		tr = session.beginTransaction();
+		String sql = "Select r from Reserva r";
+		
+		if (filter != null && !filter.equals("")) {
+			sql += " where descripcion like '%" + filter + "%'";
+		}
+		Query<Reserva> query = (Query<Reserva>)session.createQuery(sql);
+		reservas = query.list();
+	}catch(Exception ex){
+		
+		if(tr!=null) 
+			tr.rollback();
+		
+		ex.printStackTrace();
+		 
+		
+	}
+	finally {
+		session.close();
+		sessfact.close();
+	}
+
+	return reservas;
+
+}
 
     public boolean eliminar(int idReserva) {
         SessionFactory sessFact = HibernateUtil.getSessionFactory();
